@@ -1,0 +1,35 @@
+questions and answers
+
+React Category
+
+1. React is a JS Library? True
+2 ReactJS is used for building single page web apps? True
+3.ReactJS uses DOM to increase the performance? False
+4. ReactJS was created by Tim Lee? False
+5. Babel is a compiler? False
+
+GK Category:
+
+1. There are 7 continents in the world. True
+2. Danakil Depression is in Africa . True
+3. Alaska is both the westernmost and easternmost state in America. True
+4. Antarctica is the smallest desert in the world. False
+5. Russia is home to less than 3 timezones. False
+
+Django Category:
+1. ORM Stands for Object Relational Mapper ? True
+2. Django rest framewor k allows creating RESTful API's ? True
+3. Django was written in python ? True
+4. The default port for django is 8000? True
+5. Django is based on MVP architecture? False
+
+BLOCKCHAIN Category
+1. P2P stands for Password to Password? False
+2. A node is a type of cryptocurrency? False2
+3. Bitcoin was created by Samsung? False
+4. Cryptocurrencies are stores on floppy disk? False
+5. Miners are computers that validate and process blockchain transactions? True
+
+//endpoint
+http://127.0.0.1:8000/quiz/q/Blockchain/
+http://127.0.0.1:8000/admin/quiz/question/add/
