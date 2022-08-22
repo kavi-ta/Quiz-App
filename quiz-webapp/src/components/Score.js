@@ -14,8 +14,6 @@ export default function Score() {
             <br></br>
             {location.state.passed? "You have passed":"You have failed"}
         </div>
-    
-    
     </div>
     </div>
     </div>

@@ -1,8 +1,8 @@
 const Web3 = require("web3")
 var contract
 var selectedAccount
-const contractAddress = "0x17a0E0E44d0Cb35F737e99d52Bb7FFd06d904328"
-const abi = [
+const contractAddress = "0xfEA4A6D2654A9C1Ea0Bc19b2f4cB4Aa190F285ad"
+const abi =[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -105,6 +105,35 @@ const abi = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "quizId",
+				"type": "uint256"
+			}
+		],
+		"name": "Score",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "quizId",
 				"type": "uint256"
@@ -154,7 +183,7 @@ const abi = [
 				"type": "bool"
 			}
 		],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -302,18 +331,7 @@ const abi = [
 			}
 		],
 		"name": "quizScore",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -550,6 +568,7 @@ const abi = [
 		"type": "function"
 	}
 ]
+
 export const connectWallet=()=>{
     let  provider = window.ethereum;
     if(typeof provider !== undefined){
@@ -573,5 +592,9 @@ export const isQuizAttempted = async (quizId)=>{
 }
 
 export const submitQuiz = async(quizId,answers)=>{
-    return await contract.methods.quizScore(selectedAccount,quizId,answers).call()
+    return await contract.methods.quizScore(selectedAccount,quizId,answers).send({from:selectedAccount})
+}
+
+export const viewScore = async(quizId)=>{
+	return await contract.methods.Score(selectedAccount,quizId).call()
 }

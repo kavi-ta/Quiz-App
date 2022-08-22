@@ -18,12 +18,11 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
     }
     mapping(address=>User) user;
     // mapping user to the quiz to the questions answered
-    constructor() ERC721("QUIZ", "CERTF") {}
+    constructor() ERC721("QUIZ", "BADGE") {}
     
     function _baseURI() internal pure override returns (string memory) {
         return "https://ipfs.io/ipfs/QmUJwE7rACTQ58URthvmb9cFyAYMB29xt9gbUP39Yk6kZt?filename=badge.json";
     }
-
     // the owner should add all new quizez in contract
     function addQuiz(uint quizId) onlyOwner public{
         quizIds.push(quizId);
@@ -37,20 +36,21 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
         return false;
     }
     
-    function attemptQuiz(address _user , uint quizId) public returns(bool){
+    function attemptQuiz(address _user , uint quizId)
+        public view
+        returns(bool)
+        {
         require(quizExists(quizId), "Quiz Not Found");
         User storage u = user[_user];
-        require(u.userQuizAttempted[quizId]==false,"You already attempted the quiz.");
-        u.userQuizAttempted[quizId]=false;
-        return (true);
+        return (!u.userQuizAttempted[quizId]);
+        
     }
 
-    function quizScore(address _user, uint quizId, string[] memory answers ) public returns(bool,uint){
+    function quizScore(address _user, uint quizId, string[] memory answers ) public{
         User storage u = user[_user];
         u.userQuizAttempted[quizId]=true;
         uint256 score = 0;
         for(uint i =0;i<answers.length;i++){
-            
             if(keccak256(bytes(answers[i])) == keccak256(bytes("true"))){
                 score+=1;
             }
@@ -60,12 +60,15 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
             u.userQuizRewardMapping[quizId] = true;
             safeMint(_user);
         }
-        else{u.userQuizRewardMapping[quizId] = false;}
-
-        return(u.userQuizRewardMapping[quizId],score);
+        else{u.userQuizRewardMapping[quizId] = false;
+        }
         
     }
 
+    function Score(address _user, uint quizId ) public view returns(bool, uint) {
+        User storage u = user[_user];
+        return(u.userQuizRewardMapping[quizId],u.userQuizScoreMapping[quizId]);
+    }
     function safeMint(address to) public{
         _tokenIdCounter.increment();
         uint256 tokenId = _tokenIdCounter.current();
@@ -78,7 +81,6 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
     {
         super._beforeTokenTransfer(from, to, tokenId);
     }
-
     function supportsInterface(bytes4 interfaceId)
         public
         view
@@ -86,6 +88,5 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
-    }
-    
+    } 
 }

@@ -7,13 +7,17 @@ const Quiz=({quiz})=> {
     const isQuizAttemptedByUser = async ()=>{
       await isQuizAttempted(id).then(
         result=>{
-          console.log(result)
           // returns true if the user has not attempted the quiz
           setCanAttempt(result)
+          if(!result){
+            return alert("you have attempted the quiz")
+          }
           
         }
       )
+
     }
+
     
   return (
     <div className='mx-5 my-3 card  text-center' style={{width: "18rem" , "display":"inline-block"}}>
@@ -28,6 +32,7 @@ const Quiz=({quiz})=> {
 
         <button className='btn btn-primary' onClick={isQuizAttemptedByUser}>Start Quiz</button>
         {canAttempt && <Navigate to={`/quiz/${id}`} />}
+
         </div>
     </div>
   )
