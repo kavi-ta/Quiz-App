@@ -20,6 +20,7 @@ const Header=({title, showWallet, showHome})=> {
     {title} 
     {showWallet && <button className='btn btn-dark' style={{float:"right"}} onClick={connectToWallet}>{isConnected? "Wallet Connected":"Connect Wallet"}</button>}
     {showHome && <Link to={"/"} className='btn btn-dark' style={{float:"right"}}>Home</Link>}
+    
     </div>
   )
 }

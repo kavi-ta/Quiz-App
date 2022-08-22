@@ -30,7 +30,10 @@ export default function QuizPage() {
 
     const onAnswerChange = (id,index)=>(event)=>{
         setQuestionAnswer({...questionanswer,[id]:event.target.value})
-        setAnswer([...answer, answer[index] = event.target.value])  
+        var ans= answer
+        ans[index] = event.target.value
+        setAnswer(ans)  
+        
     }
     
     const handleSubmit = async (e)=>{
@@ -44,8 +47,6 @@ export default function QuizPage() {
                 )
             }
         )
-        // send this answer to the smart contract
-        // redirect user to the score page and show the result from the smart contract
     }
   return (
 
@@ -62,16 +63,17 @@ export default function QuizPage() {
                     question.map((ques,index)=>{
                     return (<div key={ques.id}>
                                 <label for={`${ques.id}`} name={`${ques.id}`}>{index+1}. {ques.title} 
+                                <div className="form-check mx-3" id={`${ques.id}`} onChange={onAnswerChange(`${ques.id}`,`${index}`)}>
                                 {ques.answer.map((option)=>{
                                     return (
-                                        
-                                        <div key={option.id} className="input-group form-check mx-3" id={`${ques.id}`} onChange={onAnswerChange(`${ques.id}`,`${index}`)}>
-                                            <input className="form-check-input" type="radio" name="flexRadioDefault" id={`${ques.id}`}
+                                        <div  key={option.id}  >
+                                        <input className="form-check-input" type="radio" name={`${ques.id}`} id={`${ques.id}`}
                                             value={option.is_right}
-                                            />{option.answer_text}  
+                                            /> {option.answer_text}
                                         </div>
                                     )    
                                 })}
+                                </div>
                                 </label>
                             </div>)  
                 })

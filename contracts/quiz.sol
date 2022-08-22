@@ -18,11 +18,12 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
     }
     mapping(address=>User) user;
     // mapping user to the quiz to the questions answered
-    constructor() ERC721("QUIZ", "BADGE") {}
+    constructor() ERC721("QUIZ", "BDGE") {}
     
     function _baseURI() internal pure override returns (string memory) {
         return "https://ipfs.io/ipfs/QmUJwE7rACTQ58URthvmb9cFyAYMB29xt9gbUP39Yk6kZt?filename=badge.json";
     }
+
     // the owner should add all new quizez in contract
     function addQuiz(uint quizId) onlyOwner public{
         quizIds.push(quizId);
@@ -64,12 +65,11 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
         }
         
     }
-
     function Score(address _user, uint quizId ) public view returns(bool, uint) {
         User storage u = user[_user];
         return(u.userQuizRewardMapping[quizId],u.userQuizScoreMapping[quizId]);
     }
-    function safeMint(address to) public{
+    function safeMint(address to) internal {
         _tokenIdCounter.increment();
         uint256 tokenId = _tokenIdCounter.current();
         _safeMint(to, tokenId);
