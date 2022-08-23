@@ -19,10 +19,7 @@ const Admin=()=> {
                 }
                 setQuizIds(ids)
                 addNewQuiz(ids)
-                
             }
-            
-            
         )
     }
     return (
@@ -31,7 +28,7 @@ const Admin=()=> {
     <Header title={"Admin Page"} showHome={true} showWallet={true}/>
     <div className='m-2 my-4'>
     <div className='col d-flex justify-content-center'>
-    <button className='m-2 btn btn-light' style={{width:400,backgroundColor:"#f3f3f3",border:"2px solid gray"}}>Add quizzes to contract</button>
+    <button className='m-2 btn btn-light' style={{width:400,backgroundColor:"#f3f3f3",border:"2px solid gray"}} onClick={getQuizIdsForAdmin}>Add quizzes to contract</button>
     </div>
     <div className='col d-flex justify-content-center'>
     
