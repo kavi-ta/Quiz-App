@@ -1,8 +1,9 @@
 import React,{useState} from 'react'
-import {Link,Navigate} from "react-router-dom"
+import {Navigate} from "react-router-dom"
 import { isQuizAttempted } from '../api/web3'
 const Quiz=({quiz})=> {
     const {id, category,title} = quiz 
+    console.log(title)
     const [canAttempt, setCanAttempt] = useState("")
     const isQuizAttemptedByUser = async ()=>{
       await isQuizAttempted(id).then(
@@ -11,28 +12,20 @@ const Quiz=({quiz})=> {
           setCanAttempt(result)
           if(!result){
             return alert("you have attempted the quiz")
-          }
-          
+          }   
         }
       )
-
     }
-
-    
   return (
-    <div className='mx-5 my-3 card  text-center' style={{width: "18rem" , "display":"inline-block"}}>
-        <div className='card-header'>
-        {category.name}
+    <div className='mx-4 my-3 card text-center' style={{width: "17rem" , "display":"inline-block" }}>
+        <div className='card-header' style={{fontWeight:500, fontSize:"20",backgroundColor:"#d3d3d3"}}>
+        Category : {category.name}
         </div>
-        <div className='card-body'>
-        
+        <div className='card-body' style={{fontWeight:500 , backgroundColor:"#f3f3f3"}}>
         {title}
-        </div>
-        <div className='card-footer'>
-
-        <button className='btn btn-primary' onClick={isQuizAttemptedByUser}>Start Quiz</button>
+        <br></br>
+        <button className='btn btn-dark mt-3 btn-sm' onClick={isQuizAttemptedByUser}>Start Quiz</button>
         {canAttempt && <Navigate to={`/quiz/${id}`} />}
-
         </div>
     </div>
   )

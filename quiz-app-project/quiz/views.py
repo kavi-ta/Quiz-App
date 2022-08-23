@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .serializers import QuizSerializer,RandomQuestionSerializer,QuestionSerializer
+from .serializers import QuizSerializer,QuestionSerializer,QuizIdSerializer
 from rest_framework import generics 
 from rest_framework.response import Response
 from .models import Quizzes, Question
@@ -9,12 +9,9 @@ class Quiz(generics.ListAPIView):
     serializer_class = QuizSerializer
     queryset = Quizzes.objects.all()
 
-class RandomQuestion(APIView):
-    # get req
-    def get(self, request, format=None, **kwargs):
-        question = Question.objects.filter(quiz__title = kwargs['topic']).order_by('?')[:1]
-        serializer = RandomQuestionSerializer(question, many = True)
-        return Response(serializer.data)
+class QuizIds(generics.ListAPIView):
+    serializer_class = QuizIdSerializer
+    queryset = Quizzes.objects.all()
 
 class QuizQuestion(APIView):
     # get req

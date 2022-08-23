@@ -17,17 +17,17 @@ class QuizSerializer(serializers.ModelSerializer):
             'title',
     ] 
 
+class QuizIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quizzes
+        fields = [
+            'id'
+    ] 
+
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = ['id', 'answer_text','is_right']
-
-class RandomQuestionSerializer(serializers.ModelSerializer):
-    answer = AnswerSerializer(many=True)
-    class Meta:
-        model = Question
-        fields=['title','answer']
-
 
 class QuestionSerializer(serializers.ModelSerializer):
     answer = AnswerSerializer(many=True, read_only=True)

@@ -1,14 +1,15 @@
 const Web3 = require("web3")
 var contract
 var selectedAccount
-const contractAddress = "0x18c65E3f038F180F1BfAD51e88fd1a6c3FC3521F"
+const contractAddress = "0x20C2bA6c9FaCe0dd50F6C1522eB48682d299BdA7"
+const adminAddress = "0x7Cf8cFf20F2F569A821A0E62fDF1FC49bF6149a8"
 const abi = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "quizId",
-				"type": "uint256"
+				"internalType": "uint256[]",
+				"name": "quizzes",
+				"type": "uint256[]"
 			}
 		],
 		"name": "addQuiz",
@@ -562,7 +563,8 @@ export const connectWallet=()=>{
       provider.request({method:'eth_requestAccounts'})
       .then(
         (accounts)=>{
-            selectedAccount=accounts[0]
+            selectedAccount=Web3.utils.toChecksumAddress(accounts[0])
+			
         }
       ).catch(err=>console.log(err))
     }
@@ -583,4 +585,13 @@ export const submitQuiz = async(quizId,answers)=>{
 
 export const viewScore = async(quizId)=>{
 	return await contract.methods.Score(selectedAccount,quizId).call()
+}
+
+export const addNewQuiz = async(quizzes)=>{
+	return await contract.methods.addQuiz(quizzes).send({from:adminAddress})
+}
+
+export const getOwner =()=>{
+	return selectedAccount===adminAddress
+
 }

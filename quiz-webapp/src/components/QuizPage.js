@@ -23,7 +23,6 @@ export default function QuizPage() {
            console.log(err)
        }
    )}
-
     useEffect(() => {
         getQuestions(id)
     },[id])
@@ -33,7 +32,6 @@ export default function QuizPage() {
         var ans= answer
         ans[index] = event.target.value
         setAnswer(ans)  
-        
     }
     
     const handleSubmit = async (e)=>{
@@ -49,19 +47,18 @@ export default function QuizPage() {
         )
     }
   return (
-
     <div>
-    <div className='p-4 text-center' style={{backgroundColor:"red", fontSize:20}}>
-    <Link to={"/"} className='btn btn-dark' style={{float:"right"}}>Close</Link>
-    <label className='btn btn-dark' style={{float:"left"}}>{isQuiz ? question[0].quiz.category.name:"No quiz here"}</label> 
-    {isQuiz? question[0].quiz.category.name:"No title"}  
+    <div className='p-4 text-center' style={{backgroundColor:"#C9BBCF", fontSize:20, boxShadow:"0px 3px 6px",fontWeight:600}}>
+    <label className='btn btn-dark btn-sm' style={{float:"left"}}>Category : {isQuiz ? question[0].quiz.category.name:"No quiz here"}</label> 
+    <label>{isQuiz? question[0].quiz.title:"No title"}</label>
+    <Link to={"/"} className='btn btn-dark btn-sm' style={{float:"right"}}>Close</Link>
     </div>
-        <div className='col-md-6 col-lg-6 offset-sm-3 text-left shadow p-3 mb-5 bg-white rounded my-4'>
-        <form className='p-2 m-2'>
-                <div className='form-group'>
+        <div className='col-md-6 col-lg-6 offset-sm-3 text-left shadow  mb-5 bg-white ' >
+        <form className=' p-4 px-5 rounded my-4' style={{backgroundColor:"#f3f3f3",boxShadow:"0px 3px 6px"}} >
+                <div className='form-group '>
                 {isQuiz?
                     question.map((ques,index)=>{
-                    return (<div key={ques.id}>
+                    return (<div key={ques.id} className="p-1">
                                 <label for={`${ques.id}`} name={`${ques.id}`}>{index+1}. {ques.title} 
                                 <div className="form-check mx-3" id={`${ques.id}`} onChange={onAnswerChange(`${ques.id}`,`${index}`)}>
                                 {ques.answer.map((option)=>{
@@ -81,10 +78,10 @@ export default function QuizPage() {
                 "No questions"
             }
                 </div>
-                <button type="submit" class=" my-4 btn btn-primary " onClick={handleSubmit}>Submit Quiz</button>
+                <button type="submit" class=" my-4 px-4 btn btn-dark" 
+                onClick={handleSubmit}>Submit</button>
         </form>
-        </div>
-        
+        </div>   
     </div>
     
   )

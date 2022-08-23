@@ -23,12 +23,11 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
     function _baseURI() internal pure override returns (string memory) {
         return "https://ipfs.io/ipfs/QmUJwE7rACTQ58URthvmb9cFyAYMB29xt9gbUP39Yk6kZt?filename=badge.json";
     }
-
     // the owner should add all new quizez in contract
-    function addQuiz(uint quizId) onlyOwner public{
-        quizIds.push(quizId);
+    function addQuiz(uint[] memory quizzes) onlyOwner public{
+        quizIds = quizzes;
     }
-
+    
     function quizExists(uint quizId) internal view returns (bool){
         for(uint256 i=0; i<quizIds.length;i++){
             if(quizIds[i]==quizId){

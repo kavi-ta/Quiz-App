@@ -29,3 +29,18 @@ export const getQuestionsForQuizById = async (id)=>{
         console.log(err)
     })
 }
+
+export const getQuizIds = async ()=>{
+    return await fetch(`${userAPI}/quiz/qids/`,{
+        method:"GET"
+
+    })
+    .then(response=>{
+        return response.json()
+    })
+    .catch(
+        err=>{
+            console.log(err)
+        }
+    )
+}
