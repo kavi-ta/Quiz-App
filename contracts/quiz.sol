@@ -47,6 +47,7 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
     }
 
     function quizScore(address _user, uint quizId, string[] memory answers ) public{
+        require(quizExists(quizId),"Quiz not Found");
         User storage u = user[_user];
         u.userQuizAttempted[quizId]=true;
         uint256 score = 0;

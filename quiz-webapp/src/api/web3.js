@@ -1,7 +1,7 @@
 const Web3 = require("web3")
 var contract
 var selectedAccount
-const contractAddress = "0x20C2bA6c9FaCe0dd50F6C1522eB48682d299BdA7"
+const contractAddress = "0x2D310299A77911C239fcB5561341e7E8383d23db"
 const adminAddress = "0x7Cf8cFf20F2F569A821A0E62fDF1FC49bF6149a8"
 const abi = [
 	{
