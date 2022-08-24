@@ -13,8 +13,6 @@ export default function Score() {
             Score : {location.state.quizScore}
             <br></br>
             {location.state.passed? "You have earned a gold badge!! ":"You did not pass the quiz."}
-          
-            
         </div>
     </div>
     </div>

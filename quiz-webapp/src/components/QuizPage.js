@@ -48,13 +48,13 @@ export default function QuizPage() {
     }
   return (
     <div>
-    <div className='p-4 text-center' style={{backgroundColor:"#C9BBCF", fontSize:20, boxShadow:"0px 3px 6px",fontWeight:600}}>
+    <div className='p-4 text-center text-white' style={{backgroundColor:"#2C3333", fontSize:20, boxShadow:"0px 3px 6px",fontWeight:600}}>
     <label className='btn btn-dark btn-sm' style={{float:"left"}}>Category : {isQuiz ? question[0].quiz.category.name:"No quiz here"}</label> 
     <label>{isQuiz? question[0].quiz.title:"No title"}</label>
     <Link to={"/"} className='btn btn-dark btn-sm' style={{float:"right"}}>Close</Link>
     </div>
-        <div className='col-md-6 col-lg-6 offset-sm-3 text-left shadow  mb-5 bg-white ' >
-        <form className=' p-4 px-5 rounded my-4' style={{backgroundColor:"#f3f3f3",boxShadow:"0px 3px 6px"}} >
+        <div className='col-md-6 col-lg-6 offset-sm-3 text-left shadow bg-white ' >
+        <form className=' p-4 px-5 rounded mt-4' style={{backgroundColor:"#f3f3f3",boxShadow:"0px 3px 6px"}} >
                 <div className='form-group '>
                 {isQuiz?
                     question.map((ques,index)=>{

@@ -16,9 +16,8 @@ const Header=({title, showWallet, showHome,showAdmin})=> {
   })
   
   return (
-    <div className='p-4 text-center' style={{backgroundColor:"#C9BBCF", fontSize:20, fontWeight:600,boxShadow:"0px 3px 6px"}}>
+    <div className='p-4 text-center text-white' style={{backgroundColor:"#2C3333", fontSize:20, fontWeight:600,boxShadow:"0px 1px 6px "}}>
     {showHome && <Link to={"/"} className=' btn btn-dark btn-sm' style={{float:"left"}}>Home</Link>}
-    
     {showAdmin && <Link to={"/admin"} className='btn btn-dark btn-sm' style={{float:"left"}}>Admin</Link>}
     {title} 
     {showWallet && <button className='btn btn-dark btn-sm' style={{float:"right"}} onClick={connectToWallet}>{isConnected? "Wallet Connected":"Connect Wallet"}</button>}

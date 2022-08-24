@@ -28,7 +28,7 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
         quizIds = quizzes;
     }
     
-    function quizExists(uint quizId) internal view returns (bool){
+    function quizExists(uint quizId) public view returns (bool){
         for(uint256 i=0; i<quizIds.length;i++){
             if(quizIds[i]==quizId){
                 return true;
@@ -44,6 +44,10 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
         User storage u = user[_user];
         return (!u.userQuizAttempted[quizId]);
         
+    }
+
+    function viewQuizes() public view returns (uint256[] memory){
+        return quizIds;
     }
 
     function quizScore(address _user, uint quizId, string[] memory answers ) public{
@@ -74,6 +78,7 @@ contract MyNFT is ERC721, ERC721Enumerable, Ownable {
         uint256 tokenId = _tokenIdCounter.current();
         _safeMint(to, tokenId);
     }
+
     // The following functions are overrides required by Solidity.
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)
         internal

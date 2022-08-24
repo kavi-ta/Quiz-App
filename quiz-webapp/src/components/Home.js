@@ -8,13 +8,16 @@ const Home = ()=> {
   const [quizzes, setQuizzes] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
 
+  const checkAdmin = ()=>{
+    setIsAdmin(getOwner())
+  }
   useEffect(() => {
     getAllQuizzes().then(
       data=>{
         setQuizzes(data)
-        setIsAdmin(getOwner())
+        checkAdmin()
       }
-    )
+    ) 
   }, []) 
   return (
     <div>

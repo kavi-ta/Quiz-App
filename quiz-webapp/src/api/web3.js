@@ -1,7 +1,7 @@
 const Web3 = require("web3")
 var contract
 var selectedAccount
-const contractAddress = "0x2D310299A77911C239fcB5561341e7E8383d23db"
+const contractAddress = "0x30a8Cd2eB6f0f583a8dB257A969d80A36B4A02cd"
 const adminAddress = "0x7Cf8cFf20F2F569A821A0E62fDF1FC49bF6149a8"
 const abi = [
 	{
@@ -404,6 +404,25 @@ const abi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "quizId",
+				"type": "uint256"
+			}
+		],
+		"name": "quizExists",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
 			}
@@ -554,6 +573,19 @@ const abi = [
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "viewQuizes",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
 export const connectWallet=()=>{
@@ -591,7 +623,13 @@ export const addNewQuiz = async(quizzes)=>{
 	return await contract.methods.addQuiz(quizzes).send({from:adminAddress})
 }
 
+export const quizExistsOnContract = async(quizId)=>{
+	return await contract.methods.quizExists(quizId).call()
+}
 export const getOwner =()=>{
 	return selectedAccount===adminAddress
+}
 
+export const getQuizzesOnContract = async()=>{
+	return await contract.methods.viewQuizes().call()
 }
